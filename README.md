@@ -5,6 +5,8 @@
 
 Export price data from Discogs listings to InfluxDB
 
+![Screenshot of data in Grafana](https://pbs.twimg.com/media/EuHE0axWgAI_RQP?format=jpg&name=4096x4096)
+
 ## Table of Contents
 
 - [Background](#background)
