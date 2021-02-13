@@ -16,5 +16,5 @@ build_x64:
 install:
 	mkdir -p /opt/discogs-influxdb
 	cp bin/discogs-influxdb /opt/discogs-influxdb
-	cp discogs-influxdb.service /etc/system/systemd/
-	cp discogs-influxdb.timer /etc/system/systemd/
+	cp discogs-influxdb.service /etc/systemd/system/
+	cp discogs-influxdb.timer /etc/systemd/system/

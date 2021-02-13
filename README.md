@@ -56,7 +56,7 @@ You can invoke the binary to just trigger a one time push to InfluxDB.
 ### Systemd
 
 A sample systemd service and a timer are included to run `discogs-influxdb` at regular intervals.
-Copy the files for systemd over to `/etc/system/systemd/` and then copy the binary and config file for `discogs-influxdb` over to `/opt/discogs-influxdb` (or change the path in the systemd service), afterwards reload and restart:
+Copy the files for systemd over to `/etc/systemd/system/` and then copy the binary and config file for `discogs-influxdb` over to `/opt/discogs-influxdb` (or change the path in the systemd service), afterwards reload and restart:
 
 ```shell
 $ cp discogs-influxdb.service /etc/system/systemd/
