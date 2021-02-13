@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math"
 
 	discogsAPI "github.com/thibmaek/influxdb-discogs/discogs"
@@ -20,8 +21,15 @@ type Point struct {
 
 // CreatePoint makes a new Point struct containing record price info
 func CreatePoint(discogs discogsAPI.Discogs, releaseID int) Point {
-	release, _ := discogs.Release(releaseID)
-	stats, _ := discogs.ReleaseStats(releaseID)
+	release, err := discogs.Release(releaseID)
+	if err != nil {
+		log.Fatalf("Failed to get release %d: %v", releaseID, err)
+	}
+
+	stats, err := discogs.ReleaseStats(releaseID)
+	if err != nil {
+		log.Fatalf("Failed to get stats for release %d: %v", releaseID, err)
+	}
 
 	var catNums []string
 	for _, l := range release.Labels {
