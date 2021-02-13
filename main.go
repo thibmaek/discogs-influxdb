@@ -34,20 +34,26 @@ func discogsClient(c *Config) discogsAPI.Discogs {
 	return client
 }
 
-func createPoints(r []interface{}, discogs discogsAPI.Discogs) []Point {
-	var releases []Point
-	for _, v := range r {
-		p := CreatePoint(discogs, int(v.(int64)))
-		releases = append(releases, p)
+func createPoints(releases []interface{}, limit bool, discogs discogsAPI.Discogs) []Point {
+	var pts []Point
+
+	for _, r := range releases {
+		if limit {
+			time.Sleep(time.Second * 5)
+		}
+
+		p := CreatePoint(discogs, int(r.(int64)))
+		pts = append(pts, p)
 	}
 
-	return releases
+	return pts
 }
 
-func getFlags() (*string, *bool) {
+func getFlags() (*string, *bool, *bool) {
 	cwd, _ := os.Executable()
 	cfgPath := flag.String("config", path.Join(cwd, "..", "config.toml"), "Path to the config.toml file")
 	verbose := flag.Bool("verbose", false, "Show verbose output about records being written")
+	rateLimit := flag.Bool("limit", false, "Limit the request made to Discogs API. This will just sleep some seconds before making the new request")
 	flag.Parse()
 
 	if *verbose {
@@ -55,11 +61,11 @@ func getFlags() (*string, *bool) {
 		fmt.Printf("Using config file %s\n", p)
 	}
 
-	return cfgPath, verbose
+	return cfgPath, verbose, rateLimit
 }
 
 func main() {
-	f, v := getFlags()
+	f, v, l := getFlags()
 	c := GetConfig(*f)
 
 	discogs := discogsClient(c)
@@ -69,7 +75,7 @@ func main() {
 		fmt.Printf("Writing to InfluxDB host: %s on bucket: %+v\n", c.InfluxHost, c.InfluxBucket)
 	}
 
-	releases := createPoints(c.MonitoredReleases, discogs)
+	releases := createPoints(c.MonitoredReleases, *l, discogs)
 
 	for _, r := range releases {
 		point := influxdb2.NewPointWithMeasurement("listing").
