@@ -10,7 +10,8 @@ build_arm:
 	GOOS=linux GOARCH=arm GOARM=6 go build -o bin/discogs-influxdb_arm .
 
 build_x64:
-	go build -o bin/discogs-influxdb .
+	GOOS=darwin go build -o bin/discogs-influxdb_mac .
+	GOOS=linux go build -o bin/discogs-influxdb_linux .
 
 install:
 	mkdir -p /opt/discogs-influxdb
