@@ -73,8 +73,11 @@ func main() {
 
 	for _, r := range releases {
 		point := influxdb2.NewPointWithMeasurement("listing").
-			AddTag("title", r.Title).
 			AddTag("id", r.Id).
+			AddTag("title", r.Title).
+			AddTag("artist", r.Artist).
+			AddTag("uri", r.URI).
+			AddTag("catno", r.CatNo).
 			AddTag("currency", r.Currency).
 			AddField("price", r.Price).
 			AddField("num_for_sale", r.ForSale).
