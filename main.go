@@ -46,7 +46,7 @@ func createPoints(r []interface{}, discogs discogsAPI.Discogs) []Point {
 
 func getFlags() (*string, *bool) {
 	cwd, _ := os.Executable()
-	cfgPath := flag.String("config", path.Join(cwd, "config.toml"), "Path to the config.toml file")
+	cfgPath := flag.String("config", path.Join(cwd, "..", "config.toml"), "Path to the config.toml file")
 	verbose := flag.Bool("verbose", false, "Show verbose output about records being written")
 	flag.Parse()
 
