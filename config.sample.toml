@@ -1,0 +1,23 @@
+[discogs]
+  token = "" # Obtain an API token from Discogs and add it here
+
+[influxdb]
+  host = "http://0.0.0.0"
+  port = 8086
+
+  # discogs-influxdb supports both InfluxDB v2 and v1.8.
+  # For more info check the documentation of InfluxDBv2 golang client
+
+  # InfluxDB 2
+  # token = ""
+  # org = ""
+  # bucket = ""
+
+  # InfluxDB v1.8
+  user = ""
+  password = ""
+  database = "discogs"
+  retention_policy = "" # If left blank, this will pick the default retention policy (usually autogen)
+
+[releases]
+  monitored = [] # An array of numbers, where the numbers are release IDs that you can get from Discogs URLs

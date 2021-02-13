@@ -1,0 +1,10 @@
+[Unit]
+Description=Export price data from Discogs listings to InfluxDB
+Wants=discogs-influxdb.timer
+
+[Service]
+Type=oneshot
+ExecStart=/opt/discogs-influxdb/discogs-influxdb
+
+[Install]
+WantedBy=multi-user.target

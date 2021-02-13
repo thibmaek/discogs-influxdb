@@ -1,0 +1,10 @@
+[Unit]
+Description=
+Requires=discogs-influxdb.service
+
+[Timer]
+Unit=discogs-influxdb.service
+OnCalendar=hourly
+
+[Install]
+WantedBy=timers.target
