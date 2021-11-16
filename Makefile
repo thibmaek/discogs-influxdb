@@ -1,5 +1,10 @@
 .DEFAULT_GOAL := build
 
+dependencies:
+	asdf install
+	pre-commit install
+	go get
+
 clean:
 	rm -rf bin
 	go mod tidy
